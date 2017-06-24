@@ -4,7 +4,7 @@ import Container from './components/Container';
 import Measure from './components/Measure';
 import H1 from './components/H1';
 import P from './components/P';
-import Input from './components/Input';
+import Button from './components/Button';
 import './global-styles';
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
                     <Measure>
                         <H1>Caesar</H1>
                         <P>This is a description of our app.</P>
-                        <Input type="button" value="Click here" />
+                        <Button>Sign in with Spotify</Button>
                     </Measure>
                 </Container>
             </div>
