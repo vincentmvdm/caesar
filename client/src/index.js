@@ -18,8 +18,8 @@ import Group from './containers/Group';
 import './global-styles';
 
 const createStoreWithMiddleware = compose(
-    applyMiddleware(promise),
-    applyMiddleware(reduxLogger)
+    applyMiddleware(promise)// ,
+    // applyMiddleware(reduxLogger)
 )(createStore);
 
 ReactDOM.render(

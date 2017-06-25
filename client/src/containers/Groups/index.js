@@ -6,11 +6,9 @@ import { Link } from 'react-router-dom';
 import Container from '../../components/Container';
 import Flex from '../../components/Flex';
 import Margin from '../../components/Margin';
-import Padding from '../../components/Padding';
 
 import H1 from '../../components/H1';
 import H2 from '../../components/H2';
-import H3 from '../../components/H3';
 import P from '../../components/P';
 import Button from '../../components/Button';
 
@@ -55,6 +53,36 @@ class Groups extends Component {
             avatar = <Avatar src={this.props.me["images"][0]["url"]} alt={this.props.me["display_name"]} width="15" height="15" />;
         }
 
+        const groups = this.props.myGroups.map((group) => {
+            return (
+                <TableRow key={group}>
+                    <TableCell>{group}</TableCell>
+                </TableRow>
+            );
+        });
+
+        let overview = null;
+
+        if (groups.length === 0) {
+            overview = (
+                <P>ADD EMPTY STATE MESSAGE HERE</P>
+            );
+        } else {
+            overview = (
+                <Table marginTop="4">
+                    <TableHead>
+                        <TableRow>
+                            <TableCellHeader>Group name</TableCellHeader>
+                            <TableCellHeader textRight>Group members</TableCellHeader>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {groups}
+                    </TableBody>
+                </Table>
+            );
+        }
+
         return (
             <Container>
                 <Margin marginTop="8">
@@ -73,21 +101,7 @@ class Groups extends Component {
                         <Button>Join</Button>
                     </div>
                 </Flex>
-                <Table marginTop="4">
-                    <TableHead>
-                        <TableRow>
-                            <TableCellHeader>Group name</TableCellHeader>
-                            <TableCellHeader textRight>Group members</TableCellHeader>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell>Testing</TableCell>
-                            <TableCell>Testing 123</TableCell>
-                        </TableRow>
-                    </TableBody>
-
-                </Table>
+                {overview}
 
                 <Link to="/groups/2">Testing</Link>
             </Container>
@@ -99,7 +113,7 @@ function mapStateToProps(state) {
     return {
         auth: state.auth,
         me: state.me,
-        groups: state.groups,
+        myGroups: state.myGroups
     };
 }
 
