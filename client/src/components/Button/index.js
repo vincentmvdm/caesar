@@ -4,7 +4,7 @@ import padding from '../../utils/padding';
 
 const Button = styled(Link)`
     ${padding}
-    background-color: #1db954;
+    background-color: #1ac776;
     border-radius: 256px;
     color: white;
     padding-top: 8px;
@@ -17,7 +17,7 @@ const Button = styled(Link)`
     text-decoration: none;
 
     &:hover {
-        background-color: #1cd85e;
+        background-color: #2ee491;
         cursor: pointer;
     }
 `;

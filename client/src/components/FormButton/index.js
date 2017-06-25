@@ -3,7 +3,7 @@ import padding from '../../utils/padding';
 
 const FormButton = styled.button`
     ${padding}
-    background-color: #1db954;
+    background-color: #1ac776;
     border-radius: 256px;
     border: none;
     color: white;
@@ -16,7 +16,7 @@ const FormButton = styled.button`
     text-transform: uppercase;
 
     &:hover {
-        background-color: #1cd85e;
+        background-color: #2ee491;
         cursor: pointer;
     }
 `;

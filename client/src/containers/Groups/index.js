@@ -97,7 +97,7 @@ class Groups extends Component {
                 </Margin>
                 <H1 marginTop="4">Hi {this.props.me["display_name"]}</H1>
                 <P marginTop="1">
-                    Want to make playlists that both you and your friend like? Lorem ipsum dolor sit amet.
+                    Create or join a group and begin your journey to a :fire: playlist.
                 </P>
                 <Flex justifyContent="space-between" alignItems="center" marginTop="4">
                     <H2>Your groups</H2>
