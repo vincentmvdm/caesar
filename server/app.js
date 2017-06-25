@@ -166,7 +166,7 @@ app.post('/groups/join', (req, res) => {
     ephemeral.users[uid].groups.push(code);
     if (ephemeral.groups[code].people.length === 2) {
       return request.post({
-        url: 'https://api.spotify.com/v1/users/' + uid + '/playlists',
+        url: 'https://api.spotify.com/v1/users/' + ephemeral.groups[code].people[0] + '/playlists',
         headers: { 'Authorization': 'Bearer ' + access_token },
         json: true,
         body: {
@@ -177,6 +177,13 @@ app.post('/groups/join', (req, res) => {
       })
       .then((body) => {
         ephemeral.groups[code].playlist = body.id;
+        return request.put({
+          url: 'https://api.spotify.com/v1/users/' + ephemeral.groups[code].people[0] + '/playlists/' + ephemeral.groups[code].playlist + '/followers',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true,
+        });
+      })
+      .then((body) => {
         // TODO update the playlist
       });
     }
