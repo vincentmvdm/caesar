@@ -1,23 +1,67 @@
 import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+
 import Container from '../../components/Container';
 import H1 from '../../components/H1';
-import P from '../../components/P';
-import List from '../../components/List';
-import ListItem from '../../components/ListItem';
+import Form from '../../components/Form';
+import Input from '../../components/Input';
+import { joinGroup } from '../../actions';
 
 class GroupJoin extends Component {
+    renderField = (field) => {
+        const { meta: { touched, error } } = field;
+
+        return (
+            <div>
+                <label>{field.label}</label>
+                <Input
+                    type="text"
+                    {...field.input}
+                />
+            {touched ? error : ''}
+            </div>
+        );
+    }
+
+    onSubmit = (values) => {
+        this.props.joinGroup(values, () => {
+            this.props.history.push('/groups');
+        });
+    };
+
     render() {
+        const { handleSubmit } = this.props;
+
         return (
             <Container>
                 <H1 marginTop="6">Join a group</H1>
-                <P marginTop="1">Test...</P>
-                <List>
-                    <ListItem>Test</ListItem>
-                    <ListItem>Testing</ListItem>
-                </List>
+                <Form onSubmit={handleSubmit(this.onSubmit)}>
+                    <Field
+                        label="Test"
+                        name="existingGroupName"
+                        component={this.renderField}
+                    />
+                    <button type="submit">Submit</button>
+                </Form>
             </Container>
         );
     }
 }
 
-export default GroupJoin;
+function validate(values) {
+    const errors = {};
+
+    if (!values.existingGroupName) {
+        errors.existingGroupName = "Enter a group name";
+    }
+
+    return errors;
+}
+
+export default reduxForm({
+    validate,
+    form: 'GroupJoinForm'
+})(
+    connect(null, { joinGroup } )(GroupJoin)
+);
