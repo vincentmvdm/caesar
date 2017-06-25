@@ -10,7 +10,7 @@ import querystring from 'querystring';
 
 class SignIn extends Component {
     render() {
-        const scope='playlist-modify-public playlist-modify-private user-read-private user-read-email';
+        const scope='playlist-modify-public playlist-modify-private user-read-private user-read-email user-top-read';
         const client_id = '524b1bd0390740f3802408f733ecc338';
         const redirect_uri = 'http://localhost:8888/callback';
 
