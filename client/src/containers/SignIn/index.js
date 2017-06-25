@@ -23,7 +23,7 @@ class SignIn extends Component {
             });
 
         return (
-            <Flex alignItems="center" justifyContent="center">
+            <Flex alignItems="center" justifyContent="center" height="100vh">
                 <Container>
                     <Measure>
                         <H1>Caesar</H1>
