@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { saveAuth, fetchMe, fetchGroups } from '../../actions';
+import { Link } from 'react-router-dom';
+import { emoji } from 'node-emoji';
 
 import Container from '../../components/Container';
 import Flex from '../../components/Flex';
@@ -110,7 +112,7 @@ class Groups extends Component {
                 </Margin>
                 <H1 marginTop="4">Hi {this.props.me["display_name"]}</H1>
                 <P marginTop="1">
-                    Create or join a group and begin your journey to a :fire: playlist.
+                    Create or join a group and begin your journey to a {emoji.fire} playlist.
                 </P>
                 <Flex justifyContent="space-between" alignItems="center" marginTop="4">
                     <H2>Your groups</H2>
