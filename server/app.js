@@ -16,7 +16,7 @@ var scopes='user-read-private user-read-email';
 
 var client_id = '524b1bd0390740f3802408f733ecc338'; // Your client id
 var client_secret = 'b8b03bdcf7764b05bb57862de7b1b7b3'; // Your secret
-var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -40,7 +40,7 @@ var app = express();
 app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
 
-app.get('/login', function(req, res) {
+app.get('/', function(req, res) {
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
