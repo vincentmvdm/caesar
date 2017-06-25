@@ -106,7 +106,7 @@ class Groups extends Component {
         }
 
         return (
-            <Container>
+            <Container className="animated fadeIn">
                 <Margin marginTop="8">
                     {avatar}
                 </Margin>

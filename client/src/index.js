@@ -7,6 +7,7 @@ import promise from 'redux-promise';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import 'animate.css/animate.min.css';
 import 'sanitize.css/sanitize.css';
 import CaesarTheme from './components/CaesarTheme';
 import SignIn from './containers/SignIn';

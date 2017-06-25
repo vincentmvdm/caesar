@@ -27,7 +27,7 @@ class SignIn extends Component {
             <DuoTone>
                 <Flex alignItems="center" justifyContent="center" height="100vh">
                     <Container>
-                        <Measure>
+                        <Measure className="animated fadeIn">
                             <H1 color="white">Cynthesis</H1>
                             <P color="white" marginTop="1">Cynthesis uses Machine Learning to generate a playlist that appeals to all members of a group based on audio features from the users’ top tracks.</P>
                             <Margin marginTop="6">

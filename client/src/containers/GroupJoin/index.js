@@ -47,7 +47,7 @@ class GroupJoin extends Component {
         const { handleSubmit } = this.props;
 
         return (
-            <Container>
+            <Container className="animated fadeIn">
                 <H1 marginTop="6">Join a group</H1>
                 <Form onSubmit={handleSubmit(this.onSubmit)} marginTop="4">
                     <Field
