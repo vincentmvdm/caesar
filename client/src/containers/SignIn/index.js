@@ -13,9 +13,9 @@ class SignInPage extends Component {
             <Flex alignItems="center" justifyContent="center">
                 <Container>
                     <Measure>
-                        <H1 marginTop="6">Caesar</H1>
+                        <H1>Caesar</H1>
                         <P marginTop="1">This is a description of our app.</P>
-                        <Margin marginTop="4">
+                        <Margin marginTop="6">
                             <Button>Sign in with Spotify</Button>
                         </Margin>
                     </Measure>

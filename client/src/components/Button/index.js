@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import padding from '../../utils/padding';
 
 const Button = styled.a`
+    ${padding}
     background-color: #1db954;
     border-radius: 256px;
     color: white;

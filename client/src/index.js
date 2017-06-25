@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'sanitize.css/sanitize.css';
 import CaesarTheme from './components/CaesarTheme';
-import SignInPage from './containers/SignInPage';
+import SignIn from './containers/SignIn';
 import Groups from './containers/Groups';
 import GroupNew from './containers/GroupNew';
 import GroupJoin from './containers/GroupJoin';
@@ -19,7 +19,7 @@ ReactDOM.render(
                 <Route path="/groups/join" component={GroupJoin} />
                 <Route path="/groups/:id" component={Group} />
                 <Route path="/groups" component={Groups} />
-                <Route path="/" component={SignInPage} />
+                <Route path="/" component={SignIn} />
             </Switch>
         </CaesarTheme>
     </BrowserRouter>,
