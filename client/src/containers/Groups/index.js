@@ -26,11 +26,7 @@ class Groups extends Component {
     }
 
     renderTest() {
-        return this.props.test.map((playlist) => {
-            return (
-                <ListItem>{playlist.name}</ListItem>
-            );
-        });
+
     }
 
     render() {
@@ -41,9 +37,7 @@ class Groups extends Component {
                 <Margin marginTop="4">
                     <Button>Create a new group</Button>
                 </Margin>
-                <List>
-                    {this.renderTest()}
-                </List>
+
             </Container>
         );
     }

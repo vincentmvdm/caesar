@@ -4,7 +4,7 @@ var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
-var scopes='user-read-private user-read-email';
+var scopes='playlist-modify-public playlist-modify-private user-read-private user-read-email';
 
 var client_id = '524b1bd0390740f3802408f733ecc338'; // Your client id
 var client_secret = 'b8b03bdcf7764b05bb57862de7b1b7b3'; // Your secret
