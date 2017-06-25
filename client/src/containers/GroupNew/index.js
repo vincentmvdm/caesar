@@ -48,6 +48,10 @@ class GroupNew extends Component {
         return (
             <Container>
                 <H1 marginTop="6">Create a new group</H1>
+<<<<<<< HEAD
+                <button onClick={this.onSubmit}>Submit</button>
+                <Button to="/groups">Cancel</Button>
+=======
                 <Form onSubmit={handleSubmit(this.onSubmit)} marginTop="2">
                     <Field
                         label="Test"
@@ -57,6 +61,7 @@ class GroupNew extends Component {
                     <FormButton type="submit">Submit</FormButton>
                     <Button to="/groups">Cancel</Button>
                 </Form>
+>>>>>>> 42d31adb797d43e2b8bf693b6ef69b69f3280506
             </Container>
         );
     }

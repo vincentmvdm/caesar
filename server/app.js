@@ -110,7 +110,10 @@ app.post('/groups', (req, res) => {
   .then((body) => {
     const uid = body.id;
     res.send({
-      groups: ephemeral.users[uid].groups,
+      groups: ephemeral.users[uid].groups.map(code => ({
+        code,
+        data: ephemeral.groups[code],
+      })),
     });
   })
   .catch((error) => {
