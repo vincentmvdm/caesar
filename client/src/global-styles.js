@@ -28,6 +28,8 @@ injectGlobal`
     }
 
     body {
+        background-color: #181818;
+        color: #ffffff;
         font-family: Circular;
         font-weight: 200;
     }
