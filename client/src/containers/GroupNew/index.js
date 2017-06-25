@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 
 import Container from '../../components/Container';
 import H1 from '../../components/H1';
+import Margin from '../../components/Margin'
 import Form from '../../components/Form';
+
+import Label from '../../components/Label';
+
 import Input from '../../components/Input';
 import { createGroup } from '../../actions';
 
@@ -14,12 +18,16 @@ class GroupNew extends Component {
 
         return (
             <div>
-                <label>{field.label}</label>
+                <Margin marginBottom="1">
+                    <Label>{field.label}</Label>
+                </Margin>
                 <Input
                     type="text"
                     {...field.input}
                 />
-            {touched ? error : ''}
+                <Margin marginTop="1">
+                    {touched ? error : ''}
+                </Margin>
             </div>
         );
     }
@@ -36,7 +44,7 @@ class GroupNew extends Component {
         return (
             <Container>
                 <H1 marginTop="6">Create a new group</H1>
-                <Form onSubmit={handleSubmit(this.onSubmit)}>
+                <Form onSubmit={handleSubmit(this.onSubmit)} marginTop="2">
                     <Field
                         label="Test"
                         name="newGroupName"
