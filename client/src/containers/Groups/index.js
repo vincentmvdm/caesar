@@ -33,6 +33,7 @@ class Groups extends Component {
     constructor(...args) {
         super(...args);
         this.createGroup = this.createGroup.bind(this);
+        this.refreshInterval = null;
     }
 
     componentDidMount() {
@@ -51,13 +52,12 @@ class Groups extends Component {
             this.props.saveAuth(access_token, refresh_token);
             this.props.fetchMe(access_token);
         }
-        this.props.fetchGroups(access_token);
-
+        this.refreshInterval = setInterval(() => { this.props.fetchGroups(access_token); }, 5000);
     }
 
     createGroup() {
         this.props.createGroup(this.props.auth.access_token, null, () => {
-            this.componentDidMount();
+            this.props.fetchGroups(this.props.auth.access_token);
         });
     }
 
