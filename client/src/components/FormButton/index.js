@@ -10,6 +10,8 @@ const FormButton = styled.button`
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 32px;
+    box-sizing: border-box;
+
     padding-right: 32px;
     font-weight: 200;
     font-family: inherit;

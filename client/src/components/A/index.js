@@ -9,6 +9,8 @@ const A = styled.a`
     padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 32px;
+    box-sizing: border-box;
+
     padding-right: 32px;
     font-family: inherit;
     font-weight: 200;

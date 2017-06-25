@@ -5,7 +5,12 @@ import { connect } from 'react-redux';
 import Container from '../../components/Container';
 import H1 from '../../components/H1';
 import Form from '../../components/Form';
+import Label from '../../components/Label';
+import Margin from '../../components/Margin';
+
+import FormButton from '../../components/FormButton';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 import { joinGroup } from '../../actions';
 
 class GroupJoin extends Component {
@@ -14,12 +19,18 @@ class GroupJoin extends Component {
 
         return (
             <div>
-                <label>{field.label}</label>
-                <Input
-                    type="text"
-                    {...field.input}
-                />
-            {touched ? error : ''}
+                <Label>{field.label}</Label>
+                <Margin marginTop="2">
+                    <div>
+                        <Input
+                            type="text"
+                            {...field.input}
+                        />
+                    </div>
+                </Margin>
+                <Margin marginTop="1">
+                    {touched ? error : ''}
+                </Margin>
             </div>
         );
     }
@@ -36,13 +47,21 @@ class GroupJoin extends Component {
         return (
             <Container>
                 <H1 marginTop="6">Join a group</H1>
-                <Form onSubmit={handleSubmit(this.onSubmit)}>
+                <Form onSubmit={handleSubmit(this.onSubmit)} marginTop="4">
                     <Field
-                        label="Test"
+                        label="Enter the group code"
                         name="existingGroupName"
                         component={this.renderField}
                     />
-                    <button type="submit">Submit</button>
+                    <Margin marginTop="3">
+                        <Button to="/groups" notFocused>Cancel</Button>
+                        <div style={{
+                            display: 'inline-block',
+                            width: 12,
+                            height: 8,
+                        }} />
+                        <FormButton type="submit">Submit</FormButton>
+                    </Margin>
                 </Form>
             </Container>
         );

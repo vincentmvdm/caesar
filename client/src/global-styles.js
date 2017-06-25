@@ -28,7 +28,7 @@ injectGlobal`
     }
 
     body {
-        color: #ffffff;
+        color: #1a1414;
         font-family: Circular;
         font-weight: 200;
     }

@@ -4,10 +4,12 @@ import padding from '../../utils/padding';
 
 const Button = styled(Link)`
     ${padding}
-    background-color: #1ac776;
+    background-color: ${props => props.notFocused ? 'white' : '#1ac776'};
     border-radius: 256px;
-    color: white;
+    border: ${props => props.notFocused ? '1px solid #2f4ab6' : 'none'};
+    color: ${props => props.notFocused ? '#2f4ab6' : 'white'};
     padding-top: 8px;
+    box-sizing: border-box;
     padding-bottom: 8px;
     padding-left: 32px;
     padding-right: 32px;
@@ -18,7 +20,7 @@ const Button = styled(Link)`
     text-decoration: none;
 
     &:hover {
-        background-color: #2ee491;
+        background-color: ${props => props.notFocused ? '#f5f5f5' : '#2ee491' };
         cursor: pointer;
     }
 `;
