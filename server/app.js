@@ -147,5 +147,34 @@ app.post('/groups/new', (req, res) => {
   });
 });
 
+app.post('/groups/join', (req, res) => {
+  const {
+    code,
+    access_token,
+  } = req.body;
+  // get the uid
+  request.get({
+    url: 'https://api.spotify.com/v1/me',
+    headers: { 'Authorization': 'Bearer ' + access_token },
+    json: true,
+  })
+  .then((body) => {
+    const uid = body.id;
+    ephemeral.groups[code].users.push(uid);
+    ephemeral.users[uid].groups.push(code);
+    if (ephemeral.groups[code].users.length === 2) {
+      // TODO The group is complete for the first time, so create the playlist.
+    }
+    // TODO Update the playlist
+    res.send({ success: true });
+  })
+  .catch((error) => {
+    res.send({
+      error: true,
+      message: error.message,
+    });
+  });
+});
+
 console.log('Listening on 8888');
 app.listen(8888);
