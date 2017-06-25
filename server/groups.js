@@ -5,8 +5,8 @@ function createGroup(user_id){
 }
 
 function genGroupCode(){
-	high = 9999
-	low = 1111
+	var high = 9999
+	var low = 1111
 	return Math.random() * (high - low) + low
 }
 
