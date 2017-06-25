@@ -22,6 +22,7 @@ app.get('/callback', (req, res) => {
   const code = req.query.code || null;
   let access_token;
   let refresh_token;
+  let uid;
 
   request.post({
     url: 'https://accounts.spotify.com/api/token',
@@ -46,8 +47,31 @@ app.get('/callback', (req, res) => {
       json: true,
     });
   })
-  .then((response) => {
-    // we can also pass the token to the browser to make requests from there
+  .then((body) => {
+    uid = body.id;
+    return request.get({
+      url: 'https://api.spotify.com/v1/me/top/tracks',
+      headers: { 'Authorization': 'Bearer ' + access_token },
+      json: true,
+    });
+  })
+  .then((body) => {
+    // update user's stored top tracks
+    let userIndex = ephemeral.users.findIndex(u => (u.uid === uid));
+    if (userIndex === -1) {
+      // new user
+      ephemeral.users.push({
+        uid,
+        top: body.items,
+      });
+      userIndex = ephemeral.users.length - 1;
+    } else {
+      ephemeral.users[userIndex].top = body.items;
+    }
+
+    console.log(ephemeral);
+      
+    // pass the token to the browser to make requests from there
     res.redirect(frontendHost + '/groups#' + querystring.stringify({
       access_token,
       refresh_token,
@@ -56,7 +80,7 @@ app.get('/callback', (req, res) => {
   .catch((error) => {
     console.error(error);
     res.redirect(frontendHost + '/error#' + querystring({
-      error: error.message,
+      message: error.message,
     }));
   });
 });
