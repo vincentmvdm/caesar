@@ -1,5 +1,6 @@
 const axios = require('axios');
 const express = require('express'); // Express web server framework
+const bodyParser = require('body-parser');
 const request = require('request-promise'); // "Request" library
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
@@ -12,6 +13,14 @@ const redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 const frontendHost = 'http://localhost:3000';
 
 const app = express();
+
+app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const ephemeral = {
   groups: {},
@@ -88,8 +97,30 @@ app.get('/callback', (req, res) => {
   });
 });
 
+app.post('/groups', (req, res) => {
+  const access_token = req.body.access_token;
+  // get the uid
+  request.get({
+    url: 'https://api.spotify.com/v1/me',
+    headers: { 'Authorization': 'Bearer ' + access_token },
+    json: true,
+  })
+  .then((body) => {
+    const uid = body.id;
+    res.send({
+      groups: ephemeral.users[uid].groups,
+    });
+  })
+  .catch((error) => {
+    res.send({
+      error: true,
+      message: error.message,
+    });
+  });
+});
+
 app.post('/groups/new', (req, res) => {
-  const access = req.data.access_token;
+  const access_token = req.body.access_token;
   // get the uid
   request.get({
     url: 'https://api.spotify/v1/me',
@@ -109,9 +140,10 @@ app.post('/groups/new', (req, res) => {
     res.send({ code });
   })
   .catch((error) => {
-    res.redirect(frontendHost + '/error#' + querystring.stringify({
+    res.send({
+      error: true,
       message: error.message,
-    }));
+    });
   });
 });
 
