@@ -3,6 +3,7 @@ import axios from 'axios';
 export const SAVE_AUTH = "save_auth";
 export const FETCH_ME = "fetch_me";
 export const FETCH_TOP_TRACKS = "fetch_top_tracks";
+export const CREATE_GROUP = "create_group";
 
 const ROOT_URL = 'https://api.spotify.com/v1';
 
@@ -49,4 +50,14 @@ export function fetchTopTracks(access_token) {
         type: FETCH_TOP_TRACKS,
         payload: request
     };
+}
+
+export function createGroup(values, callback) {
+    callback();
+    console.log(values);
+    
+    return {
+        type: CREATE_GROUP,
+        payload: values
+    }
 }
