@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import padding from '../../utils/padding';
 
 const Button = styled.a`
-    background-color: black;
+    ${padding}
+    background-color: #1db954;
     border-radius: 256px;
     color: white;
     padding-top: 8px;
@@ -11,7 +13,7 @@ const Button = styled.a`
     text-transform: uppercase;
 
     &:hover {
-        background-color: #1ed760;
+        background-color: #1cd85e;
         cursor: pointer;
     }
 `;

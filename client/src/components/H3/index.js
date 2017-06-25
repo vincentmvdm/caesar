@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import margin from '../../utils/margin';
 
-const H1 = styled.h1`
+const H3 = styled.h3`
     ${margin}
-    font-size: 3rem;
+    font-size: 1.5rem;
 `;
 
-export default H1;
+export default H3;
