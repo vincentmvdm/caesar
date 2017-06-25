@@ -26,17 +26,19 @@ import Avatar from '../../components/Avatar';
 class Groups extends Component {
 
     componentDidMount() {
-        var hashParams = {};
-        var e, r = /([^&;=]+)=?([^&;]*)/g,
-            q = window.location.hash.substring(1);
-        while ( e = r.exec(q)) {
-           hashParams[e[1]] = decodeURIComponent(e[2]);
+        if (!this.props.auth) {
+            var hashParams = {};
+            var e, r = /([^&;=]+)=?([^&;]*)/g,
+                q = window.location.hash.substring(1);
+            while ( e = r.exec(q)) {
+               hashParams[e[1]] = decodeURIComponent(e[2]);
+            }
+            const access_token = hashParams["access_token"];
+            const refresh_token = hashParams["refresh_token"];
+            this.props.saveAuth(access_token, refresh_token);
+            this.props.fetchMe(access_token);
+            this.props.fetchGroups(access_token);
         }
-        const access_token = hashParams["access_token"];
-        const refresh_token = hashParams["refresh_token"];
-        this.props.saveAuth(access_token, refresh_token);
-        this.props.fetchMe(access_token);
-        this.props.fetchGroups(access_token);
     }
 
     renderGroupList() {
@@ -61,7 +63,8 @@ class Groups extends Component {
                 <Flex justifyContent="space-between" alignItems="center" marginTop="4">
                     <H2>Your groups</H2>
                     <div>
-                        <Link to="/groups/new"></Link>
+                        <Link to="/groups/new">MAKE A NEW GROUP</Link>
+                        <Link to="/groups/join">JOIN AN EXISTING GROUP</Link>
                         <Button>New</Button>
                         <Button>Join</Button>
                     </div>
