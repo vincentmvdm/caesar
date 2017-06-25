@@ -56,7 +56,7 @@ class GroupJoin extends Component {
                         component={this.renderField}
                     />
                     <Margin marginTop="4">
-                        <Button to="/groups" notFocused>Cancel</Button>
+                        <Button to="/groups">Cancel</Button>
                         <div style={{
                             display: 'inline-block',
                             width: 12,
