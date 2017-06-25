@@ -10,8 +10,8 @@ function genGroupCode(){
 	return Math.random() * (high - low) + low
 }
 
-function addUser(group_code, user_id){
-	groupsJSON.push({key:group_code, value:groupsJSON[group_code].push(user_id)})
+function addUser(group_code, user_id, top_tracks){
+	groupsJSON.push({key:group_code, value:groupsJSON[group_code].push(user_id).push(top_tracks)})
 }
 
 function getGroupUsers(group_code, user_id){
