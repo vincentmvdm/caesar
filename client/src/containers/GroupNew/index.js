@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import Button from '../../components/Button';
 
 import Container from '../../components/Container';
 import H1 from '../../components/H1';
@@ -51,6 +52,7 @@ class GroupNew extends Component {
                         component={this.renderField}
                     />
                     <button type="submit">Submit</button>
+                    <Button to="/groups">Cancel</Button>
                 </Form>
             </Container>
         );

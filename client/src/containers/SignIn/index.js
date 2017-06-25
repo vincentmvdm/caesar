@@ -5,7 +5,7 @@ import Measure from '../../components/Measure';
 import Margin from '../../components/Margin';
 import H1 from '../../components/H1';
 import P from '../../components/P';
-import Button from '../../components/Button';
+import A from '../../components/A';
 import querystring from 'querystring';
 
 class SignIn extends Component {
@@ -29,7 +29,7 @@ class SignIn extends Component {
                         <H1>Caesar</H1>
                         <P marginTop="1">This is a description of our app.</P>
                         <Margin marginTop="6">
-                            <Button href={loginUri}>Sign in with Spotify</Button>
+                            <A href={loginUri}>Sign in with Spotify</A>
                         </Margin>
                     </Measure>
                 </Container>

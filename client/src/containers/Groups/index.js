@@ -95,10 +95,8 @@ class Groups extends Component {
                 <Flex justifyContent="space-between" alignItems="center" marginTop="4">
                     <H2>Your groups</H2>
                     <div>
-                        <Link to="/groups/new">MAKE A NEW GROUP</Link>
-                        <Link to="/groups/join">JOIN AN EXISTING GROUP</Link>
-                        <Button>New</Button>
-                        <Button>Join</Button>
+                        <Button to="/groups/new">New</Button>
+                        <Button to="/groups/join">Join</Button>
                     </div>
                 </Flex>
                 {overview}

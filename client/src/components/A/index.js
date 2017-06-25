@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import padding from '../../utils/padding';
 
-const Button = styled(Link)`
+const A = styled.a`
     ${padding}
     background-color: #1db954;
     border-radius: 256px;
@@ -19,4 +18,4 @@ const Button = styled(Link)`
     }
 `;
 
-export default Button;
+export default A;
