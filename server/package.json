@@ -13,6 +13,7 @@
     "axios": "^0.16.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
+    "kmeans-js": "^0.1.2",
     "querystring": "^0.2.0",
     "request": "^2.81.0"
   }
