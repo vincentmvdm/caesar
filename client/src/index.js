@@ -12,7 +12,6 @@ import 'sanitize.css/sanitize.css';
 import CaesarTheme from './components/CaesarTheme';
 import SignIn from './containers/SignIn';
 import Groups from './containers/Groups';
-import GroupNew from './containers/GroupNew';
 import GroupJoin from './containers/GroupJoin';
 import Group from './containers/Group';
 import './global-styles';
@@ -27,7 +26,6 @@ ReactDOM.render(
         <BrowserRouter>
             <CaesarTheme>
                 <Switch>
-                    <Route path="/groups/new" component={GroupNew} />
                     <Route path="/groups/join" component={GroupJoin} />
                     <Route path="/groups/:id" component={Group} />
                     <Route path="/groups" component={Groups} />

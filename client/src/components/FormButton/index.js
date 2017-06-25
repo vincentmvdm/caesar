@@ -1,27 +1,27 @@
 import styled from 'styled-components';
 import padding from '../../utils/padding';
 
-const A = styled.a`
+const FormButton = styled.button`
     ${padding}
-    background-color: white;
+    background-color: #1ac776;
     border-radius: 256px;
-    color: #2f4ab6;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    border: none;
+    color: white;
+    padding-top: 8px;
+    padding-bottom: 8px;
     padding-left: 32px;
     box-sizing: border-box;
 
     padding-right: 32px;
-    font-family: inherit;
     font-weight: 200;
+    font-family: inherit;
     font-size: inherit;
     text-transform: uppercase;
-    text-decoration: none;
 
     &:hover {
-        background-color: #f5f5f5;
+        background-color: #2ee491;
         cursor: pointer;
     }
 `;
 
-export default A;
+export default FormButton;

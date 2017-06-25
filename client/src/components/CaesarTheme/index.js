@@ -9,7 +9,9 @@ for (let i = 0; i < 24; i++) {
 
 const theme = {
     scale,
-    black: '#222326'
+    black: '#1a1414',
+    green: '#2ae289',
+    blue: '#2f4ab6'
 };
 
 const CaesarTheme = (props) => {

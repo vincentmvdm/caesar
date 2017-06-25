@@ -28,13 +28,21 @@ injectGlobal`
     }
 
     body {
-        background-color: #181818;
-        color: #ffffff;
+        color: #1a1414;
         font-family: Circular;
         font-weight: 200;
     }
 
+    .fa {
+        color: white;
+    }
+
     h1, h2, h3, h4, h5, h6, p {
         margin: 0;
+    }
+
+    ::selection {
+        background: #2ae289;
+        color: white;
     }
 `;

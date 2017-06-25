@@ -7,9 +7,13 @@ import Container from '../../components/Container';
 import Flex from '../../components/Flex';
 import Margin from '../../components/Margin';
 
+import 'font-awesome/css/font-awesome.min.css';
+
 import H1 from '../../components/H1';
 import H2 from '../../components/H2';
 import P from '../../components/P';
+import FormButton from '../../components/FormButton';
+
 import Button from '../../components/Button';
 
 import Table from '../../components/Table';
@@ -21,7 +25,14 @@ import TableCellHeader from '../../components/TableCellHeader';
 
 import Avatar from '../../components/Avatar';
 
+import { createGroup } from '../../actions';
+
 class Groups extends Component {
+    constructor(...args) {
+        super(...args);
+        this.createGroup = this.createGroup.bind(this);
+        this.refreshInterval = null;
+    }
 
     componentDidMount() {
         let access_token;
@@ -40,7 +51,13 @@ class Groups extends Component {
             this.props.fetchMe(access_token);
         }
         this.props.fetchGroups(access_token);
+        this.refreshInterval = setInterval(() => { this.props.fetchGroups(access_token); }, 5000);
+    }
 
+    createGroup() {
+        this.props.createGroup(this.props.auth.access_token, null, () => {
+            this.props.fetchGroups(this.props.auth.access_token);
+        });
     }
 
     renderGroupList() {
@@ -52,11 +69,14 @@ class Groups extends Component {
         if (this.props.me.images) {
             avatar = <Avatar src={this.props.me["images"][0]["url"]} alt={this.props.me["display_name"]} width="15" height="15" />;
         }
-
         const groups = this.props.myGroups.map((group) => {
             return (
-                <TableRow key={group}>
-                    <TableCell>{group}</TableCell>
+                <TableRow key={group.code}>
+                    <TableCell>{group.code}</TableCell>
+                    <TableCell>{group.data.people.join(', ')}</TableCell>
+                    <TableCell>
+                        {group.data.people.length < 2 ? 'Waiting for friends...' : 'Ready!'}
+                    </TableCell>
                 </TableRow>
             );
         });
@@ -65,15 +85,16 @@ class Groups extends Component {
 
         if (groups.length === 0) {
             overview = (
-                <P>ADD EMPTY STATE MESSAGE HERE</P>
+                <P marginTop="4">You aren’t a part of any groups yet. Create a group to start one or join an existing group.</P>
             );
         } else {
             overview = (
                 <Table marginTop="4">
                     <TableHead>
                         <TableRow>
-                            <TableCellHeader>Group name</TableCellHeader>
-                            <TableCellHeader textRight>Group members</TableCellHeader>
+                            <TableCellHeader>Name</TableCellHeader>
+                            <TableCellHeader >Members</TableCellHeader>
+                            <TableCellHeader>Status</TableCellHeader>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -90,18 +111,21 @@ class Groups extends Component {
                 </Margin>
                 <H1 marginTop="4">Hi {this.props.me["display_name"]}</H1>
                 <P marginTop="1">
-                    Want to make playlists that both you and your friend like? Lorem ipsum dolor sit amet.
+                    Create or join a group and begin your journey to a :fire: playlist.
                 </P>
                 <Flex justifyContent="space-between" alignItems="center" marginTop="4">
                     <H2>Your groups</H2>
                     <div>
-                        <Button to="/groups/new">New</Button>
+                        <FormButton onClick={this.createGroup}>New</FormButton>
+                        <div style={{
+                            display: 'inline-block',
+                            width: 8,
+                            height: 8,
+                        }} />
                         <Button to="/groups/join">Join</Button>
                     </div>
                 </Flex>
                 {overview}
-
-                <Link to="/groups/2">Testing</Link>
             </Container>
         );
     }
@@ -115,4 +139,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { saveAuth, fetchMe, fetchGroups })(Groups);
+export default connect(mapStateToProps, { saveAuth, fetchMe, fetchGroups, createGroup })(Groups);
