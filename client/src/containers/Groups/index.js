@@ -54,7 +54,10 @@ class Groups extends Component {
                     {avatar}
                 </Margin>
                 <H1 marginTop="4">Hi {this.props.me["display_name"]}</H1>
-                <Flex justifyContent="space-between" alignItems="center" marginTop="2">
+                <P marginTop="1">
+                    Want to make playlists that both you and your friend like? Lorem ipsum dolor sit amet.
+                </P>
+                <Flex justifyContent="space-between" alignItems="center" marginTop="4">
                     <H2>Your groups</H2>
                     <div>
                         <Button>New</Button>
