@@ -45,15 +45,8 @@ class GroupNew extends Component {
         return (
             <Container>
                 <H1 marginTop="6">Create a new group</H1>
-                <Form onSubmit={handleSubmit(this.onSubmit)} marginTop="2">
-                    <Field
-                        label="Test"
-                        name="newGroupName"
-                        component={this.renderField}
-                    />
-                    <button type="submit">Submit</button>
-                    <Button to="/groups">Cancel</Button>
-                </Form>
+                <button onClick={this.onSubmit}>Submit</button>
+                <Button to="/groups">Cancel</Button>
             </Container>
         );
     }

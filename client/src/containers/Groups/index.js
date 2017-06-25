@@ -21,7 +21,13 @@ import TableCellHeader from '../../components/TableCellHeader';
 
 import Avatar from '../../components/Avatar';
 
+import { createGroup } from '../../actions';
+
 class Groups extends Component {
+    constructor(...args) {
+        super(...args);
+        this.createGroup = this.createGroup.bind(this);
+    }
 
     componentDidMount() {
         let access_token;
@@ -43,6 +49,12 @@ class Groups extends Component {
 
     }
 
+    createGroup() {
+        this.props.createGroup(this.props.auth.access_token, null, () => {
+            this.componentDidMount();
+        });
+    }
+
     renderGroupList() {
 
     }
@@ -55,8 +67,14 @@ class Groups extends Component {
 
         const groups = this.props.myGroups.map((group) => {
             return (
-                <TableRow key={group}>
-                    <TableCell>{group}</TableCell>
+                <TableRow key={group.code}>
+                    <TableCell>{group.code}</TableCell>
+                    <TableCell>{group.data.people.join(', ')}</TableCell>
+                    <TableCell>
+                        {group.data.people.length > 1 ?
+                            'Playlist generated!' :
+                            'Waiting for second user...'}
+                    </TableCell>
                 </TableRow>
             );
         });
@@ -95,7 +113,7 @@ class Groups extends Component {
                 <Flex justifyContent="space-between" alignItems="center" marginTop="4">
                     <H2>Your groups</H2>
                     <div>
-                        <Button to="/groups/new">New</Button>
+                        <button onClick={this.createGroup}>New</button>
                         <Button to="/groups/join">Join</Button>
                     </div>
                 </Flex>
@@ -115,4 +133,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { saveAuth, fetchMe, fetchGroups })(Groups);
+export default connect(mapStateToProps, { saveAuth, fetchMe, fetchGroups, createGroup })(Groups);
