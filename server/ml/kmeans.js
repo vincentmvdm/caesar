@@ -161,27 +161,27 @@ var exports = module.exports = {};
 exports.setup = function(data) {
     //get the canvas
     //get the context
-    console.log("getting extremes");
+    //console.log("getting extremes");
     dataExtremes = getDataExtremes(data);
-    console.log(dataExtremes);
-    console.log("getting ranges");
+    //console.log(dataExtremes);
+    //console.log("getting ranges");
     dataRange = getDataRanges(dataExtremes);
-    console.log(dataRange);
-    console.log("finding initial centers");
+    //console.log(dataRange);
+    //console.log("finding initial centers");
     centers = initMeans(4);
-    console.log(centers);
+    //console.log(centers);
 
-    console.log("making assignments");
+    //console.log("making assignments");
     var iterations = 20;
     var assignments = makeAssignments(data, centers);
-    console.log(assignments);
+    //console.log(assignments);
     while(iterations >= 0){
       assignments = makeAssignments(data, centers);
-      console.log("moving means");
+      //console.log("moving means");
       moveMeans(assignments, data, centers);
       iterations -= 1;
     }
-    console.log("Assignments", assignments);
+    //console.log("Assignments", assignments);
     var cuck = {};
     for(i = 0; i < assignments.length; i++){
       var tup = assignments[i];
@@ -193,8 +193,8 @@ exports.setup = function(data) {
       }
     }
     var pooop = Object.keys(cuck).reduce(function(a,b){return cuck[a]>cuck[b] ? a : b});
-    console.log("max ele", pooop);
-    console.log("cuck", cuck);
+    //console.log("max ele", pooop);
+    //console.log("cuck", cuck);
     var playlist = [];
     for(i = 0; i < assignments.length; i++){
       if (assignments[i][0] = pooop){
@@ -206,6 +206,12 @@ exports.setup = function(data) {
     //iterate over the assignments, get all the URIs for the k
 
     console.log(playlist);
+    // for(i = 0; i < playlist.length;i++){
+    //     playlist[i] = playlist[i].replaceAll(' ','');
+    //     playlist[i] = playlist[i].replaceAll("'",'');
+        
+    // }
+    return playlist;
 
 
     //try to find the largest cluster which is the playlist you return to the user

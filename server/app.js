@@ -5,6 +5,8 @@ const request = require('request-promise'); // "Request" library
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
 
+var clusters = require('./ml/testCluster2.js');
+
 const scopes='playlist-modify-public playlist-modify-private user-read-private user-read-email';
 
 const client_id = '524b1bd0390740f3802408f733ecc338'; // Your client id
@@ -181,16 +183,29 @@ app.post('/groups/join', (req, res) => {
       .then((body) => {
         ephemeral.groups[code].playlist = body.id;
         // TODO update the playlist
+        console.log("json1:");
+        console.log(ephemeral.users[uid].top);
+
+        console.log("json2");
+        console.log(ephemeral.users[ephemeral.groups[code].people[0]]);
+        console.log("playlist");
+        console.log(body.id);
+        console.log("Song list:\n", clusters.getClusterSongs(ephemeral.users[uid].top,ephemeral.users[ephemeral.groups[code].people[0]].top, access_token));
+        return clusters.getClusterSongs(ephemeral.users[uid].top,ephemeral.users[ephemeral.groups[code].people[0]].top, access_token);
+      })
+      .then((uris) => {
+        return request.put('https://api.spotify.com/v1/users/' + uid + '/playlists/' + ephemeral.groups[code].playlist + '/tracks', {
+          headers: {'Authorization': 'Bearer ' + access_token},
+          json: true,
+          body:{
+            uris,
+          }
+        });
+      })
+      .then(() => {
+        res.send({ success: true });
       });
     }
-    // TODO Update the playlist
-    res.send({ success: true });
-  })
-  .catch((error) => {
-    res.send({
-      error: true,
-      message: error.message,
-    });
   });
 });
 
