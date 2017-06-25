@@ -50,6 +50,7 @@ class Groups extends Component {
             this.props.saveAuth(access_token, refresh_token);
             this.props.fetchMe(access_token);
         }
+        this.props.fetchGroups(access_token);
         this.refreshInterval = setInterval(() => { this.props.fetchGroups(access_token); }, 5000);
     }
 
@@ -72,8 +73,10 @@ class Groups extends Component {
             return (
                 <TableRow key={group.code}>
                     <TableCell>{group.code}</TableCell>
-                    <TableCell></TableCell>
-                    <TableCell>Status</TableCell>
+                    <TableCell>{group.data.people.join(', ')}</TableCell>
+                    <TableCell>
+                        {group.data.people.length < 2 ? 'Waiting for friends...' : 'Ready!'}
+                    </TableCell>
                 </TableRow>
             );
         });
@@ -114,6 +117,11 @@ class Groups extends Component {
                     <H2>Your groups</H2>
                     <div>
                         <FormButton onClick={this.createGroup}>New</FormButton>
+                        <div style={{
+                            display: 'inline-block',
+                            width: 8,
+                            height: 8,
+                        }} />
                         <Button to="/groups/join">Join</Button>
                     </div>
                 </Flex>
