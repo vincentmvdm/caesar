@@ -39,7 +39,7 @@ class GroupNew extends Component {
                 <Form onSubmit={handleSubmit(this.onSubmit)}>
                     <Field
                         label="Test"
-                        name="groupName"
+                        name="newGroupName"
                         component={this.renderField}
                     />
                     <button type="submit">Submit</button>
@@ -52,8 +52,8 @@ class GroupNew extends Component {
 function validate(values) {
     const errors = {};
 
-    if (!values.groupName) {
-        errors.groupName = "Enter a group name";
+    if (!values.newGroupName) {
+        errors.newGroupName = "Enter a group name";
     }
 
     return errors;

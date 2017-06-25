@@ -4,6 +4,7 @@ export const SAVE_AUTH = "save_auth";
 export const FETCH_ME = "fetch_me";
 export const FETCH_TOP_TRACKS = "fetch_top_tracks";
 export const CREATE_GROUP = "create_group";
+export const JOIN_GROUP = "join_group";
 
 const ROOT_URL = 'https://api.spotify.com/v1';
 
@@ -55,9 +56,19 @@ export function fetchTopTracks(access_token) {
 export function createGroup(values, callback) {
     callback();
     console.log(values);
-    
+
     return {
         type: CREATE_GROUP,
+        payload: values
+    }
+}
+
+export function joinGroup(values, callback) {
+    callback();
+    console.log(values);
+
+    return {
+        type: JOIN_GROUP,
         payload: values
     }
 }
