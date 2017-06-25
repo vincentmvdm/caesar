@@ -74,9 +74,15 @@ export function fetchTopTracks(access_token) {
     };
 }
 
-export function createGroup(values, callback) {
-    callback();
-    console.log(values);
+export function createGroup(access_token, values, callback) {
+    const options = {
+        method: 'post',
+        url: 'http://localhost:8888/groups/new',
+        data: { access_token },
+        headers: { 'Content-Type': 'application/json' },
+    };
+    axios(options)
+    .then(callback);
 
     return {
         type: CREATE_GROUP,

@@ -33,7 +33,7 @@ class GroupNew extends Component {
     }
 
     onSubmit = (values) => {
-        this.props.createGroup(values, () => {
+        this.props.createGroup(this.props.auth.access_token, values, () => {
             this.props.history.push('/groups');
         });
     };
@@ -71,5 +71,7 @@ export default reduxForm({
     validate,
     form: 'GroupNewForm'
 })(
-    connect(null, { createGroup } )(GroupNew)
+    connect(state => ({
+        auth: state.auth,
+    }), { createGroup } )(GroupNew)
 );

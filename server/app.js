@@ -28,7 +28,7 @@ const ephemeral = {
 };
 
 const randomStr = n =>
-  Array(N + 1).join((Math.random().toString(36) + '00000000000000000').slice(2, 18)).slice(0, n);
+  Array(n + 1).join((Math.random().toString(36) + '00000000000000000').slice(2, 18)).slice(0, n);
 
 app.get('/callback', (req, res) => {
   const code = req.query.code || null;
@@ -123,7 +123,7 @@ app.post('/groups/new', (req, res) => {
   const access_token = req.body.access_token;
   // get the uid
   request.get({
-    url: 'https://api.spotify/v1/me',
+    url: 'https://api.spotify.com/v1/me',
     headers: { 'Authorization': 'Bearer ' + access_token },
     json: true,
   })

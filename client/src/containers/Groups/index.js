@@ -26,19 +26,23 @@ import Avatar from '../../components/Avatar';
 class Groups extends Component {
 
     componentDidMount() {
-        if (!this.props.auth) {
+        let access_token;
+        if (this.props.auth) {
+            access_token = this.props.auth.access_token;
+        } else {
             var hashParams = {};
             var e, r = /([^&;=]+)=?([^&;]*)/g,
                 q = window.location.hash.substring(1);
             while ( e = r.exec(q)) {
                hashParams[e[1]] = decodeURIComponent(e[2]);
             }
-            const access_token = hashParams["access_token"];
+            access_token = hashParams["access_token"];
             const refresh_token = hashParams["refresh_token"];
             this.props.saveAuth(access_token, refresh_token);
             this.props.fetchMe(access_token);
-            this.props.fetchGroups(access_token);
         }
+        this.props.fetchGroups(access_token);
+
     }
 
     renderGroupList() {
