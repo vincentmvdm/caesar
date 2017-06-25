@@ -60,6 +60,7 @@ class Groups extends Component {
                 <Flex justifyContent="space-between" alignItems="center" marginTop="4">
                     <H2>Your groups</H2>
                     <div>
+                        <Link to="/groups/new"></Link>
                         <Button>New</Button>
                         <Button>Join</Button>
                     </div>
