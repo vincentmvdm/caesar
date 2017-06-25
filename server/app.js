@@ -160,9 +160,9 @@ app.post('/groups/join', (req, res) => {
   })
   .then((body) => {
     const uid = body.id;
-    ephemeral.groups[code].users.push(uid);
+    ephemeral.groups[code].people.push(uid);
     ephemeral.users[uid].groups.push(code);
-    if (ephemeral.groups[code].users.length === 2) {
+    if (ephemeral.groups[code].people.length === 2) {
       // TODO The group is complete for the first time, so create the playlist.
     }
     // TODO Update the playlist

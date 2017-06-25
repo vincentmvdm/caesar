@@ -25,7 +25,7 @@ class GroupJoin extends Component {
     }
 
     onSubmit = (values) => {
-        this.props.joinGroup(values, () => {
+        this.props.joinGroup(this.props.auth.access_token, values, () => {
             this.props.history.push('/groups');
         });
     };
@@ -63,5 +63,5 @@ export default reduxForm({
     validate,
     form: 'GroupJoinForm'
 })(
-    connect(null, { joinGroup } )(GroupJoin)
+    connect(state => ({ auth: state.auth }), { joinGroup } )(GroupJoin)
 );

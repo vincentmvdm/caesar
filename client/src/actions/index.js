@@ -90,9 +90,18 @@ export function createGroup(access_token, values, callback) {
     }
 }
 
-export function joinGroup(values, callback) {
-    callback();
-    console.log(values);
+export function joinGroup(access_token, values, callback) {
+    const options = {
+        method: 'post',
+        url: 'http://localhost:8888/groups/join',
+        data: {
+            access_token,
+            code: values.existingGroupName
+        },
+        headers: { 'Content-Type': 'application/json' },
+    };
+    axios(options)
+    .then(callback);
 
     return {
         type: JOIN_GROUP,
