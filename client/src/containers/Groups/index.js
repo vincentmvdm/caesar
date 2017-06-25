@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchTest } from '../../actions';
+import { fetchMe } from '../../actions';
 
 import Container from '../../components/Container';
 import Margin from '../../components/Margin';
@@ -22,7 +22,7 @@ class Groups extends Component {
         const access_token = hashParams["access_token"];
         const refresh_token = hashParams["refresh_token"];
 
-        this.props.fetchTest(access_token, refresh_token);
+        this.props.fetchMe(access_token);
     }
 
     renderTest() {
@@ -30,21 +30,21 @@ class Groups extends Component {
     }
 
     render() {
+
         return (
             <Container>
-                <H1 marginTop="6">Groups</H1>
-                <P marginTop="1">Test...</P>
+                <H1 marginTop="6">Hi {this.props.me["display_name"]}</H1>
+                <P marginTop="1"></P>
                 <Margin marginTop="4">
                     <Button>Create a new group</Button>
                 </Margin>
-
             </Container>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return { test: state.test };
+    return { me: state.me };
 }
 
-export default connect(mapStateToProps, { fetchTest })(Groups);
+export default connect(mapStateToProps, { fetchMe })(Groups);

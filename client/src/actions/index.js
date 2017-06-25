@@ -1,30 +1,23 @@
 import axios from 'axios';
 
-export const FETCH_TEST = "fetch_test";
+export const FETCH_ME = "fetch_me";
 
-const ROOT_URL = 'https://api.spotify.com/v1/users/1154188194/playlists';
+const ROOT_URL = 'https://api.spotify.com/v1';
 
-export function fetchTest(access_token, refresh_token) {
+export function fetchMe(access_token) {
     const options = {
-        'method': 'post',
-        'url': 'https://api.spotify.com/v1/users/1154188194/playlists',
+        'method': 'get',
+        'url': `${ROOT_URL}/me`,
         'headers': {
             'Authorization': 'Bearer ' + access_token,
             'Content-Type': "application/json"
-        },
-        'data': {
-            'description': 'New playlist descriptionss',
-            'public': false,
-            'name': 'Names'
         }
     };
-
-    console.log(options);
 
     const request = axios(options);
 
     return {
-        type: FETCH_TEST,
+        type: FETCH_ME,
         payload: request
     };
 }
