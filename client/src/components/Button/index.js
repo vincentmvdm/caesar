@@ -13,6 +13,7 @@ const Button = styled(Link)`
     padding-right: 32px;
     font-family: inherit;
     font-size: inherit;
+    font-weight: 200;
     text-transform: uppercase;
     text-decoration: none;
 

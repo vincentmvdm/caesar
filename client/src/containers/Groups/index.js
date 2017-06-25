@@ -12,6 +12,8 @@ import 'font-awesome/css/font-awesome.min.css';
 import H1 from '../../components/H1';
 import H2 from '../../components/H2';
 import P from '../../components/P';
+import FormButton from '../../components/FormButton';
+
 import Button from '../../components/Button';
 
 import Table from '../../components/Table';
@@ -84,7 +86,7 @@ class Groups extends Component {
 
         if (groups.length === 0) {
             overview = (
-                <P>ADD EMPTY STATE MESSAGE HERE</P>
+                <P>You aren’t a part of any groups yet. Create a group to start one or join an existing group.</P>
             );
         } else {
             overview = (
@@ -114,13 +116,11 @@ class Groups extends Component {
                 <Flex justifyContent="space-between" alignItems="center" marginTop="4">
                     <H2>Your groups</H2>
                     <div>
-                        <button onClick={this.createGroup}>New</button>
+                        <FormButton onClick={this.createGroup}>New</FormButton>
                         <Button to="/groups/join">Join</Button>
                     </div>
                 </Flex>
                 {overview}
-
-                <Link to="/groups/2">Testing</Link>
             </Container>
         );
     }

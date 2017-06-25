@@ -11,6 +11,7 @@ const A = styled.a`
     padding-left: 32px;
     padding-right: 32px;
     font-family: inherit;
+    font-weight: 200;
     font-size: inherit;
     text-transform: uppercase;
     text-decoration: none;

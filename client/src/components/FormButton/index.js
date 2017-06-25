@@ -11,6 +11,7 @@ const FormButton = styled.button`
     padding-bottom: 8px;
     padding-left: 32px;
     padding-right: 32px;
+    font-weight: 200;
     font-family: inherit;
     font-size: inherit;
     text-transform: uppercase;
