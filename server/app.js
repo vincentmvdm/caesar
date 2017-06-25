@@ -14,9 +14,12 @@ const frontendHost = 'http://localhost:3000';
 const app = express();
 
 const ephemeral = {
-  groups: [],
-  users: [],
+  groups: {},
+  users: {},
 };
+
+const randomStr = n =>
+  Array(N + 1).join((Math.random().toString(36) + '00000000000000000').slice(2, 18)).slice(0, n);
 
 app.get('/callback', (req, res) => {
   const code = req.query.code || null;
@@ -57,16 +60,16 @@ app.get('/callback', (req, res) => {
   })
   .then((body) => {
     // update user's stored top tracks
-    let userIndex = ephemeral.users.findIndex(u => (u.uid === uid));
-    if (userIndex === -1) {
+    if (ephemeral.users[uid]) {
+      // existing user
+      ephemeral.users[uid].top = body.items;
+    } else {
       // new user
-      ephemeral.users.push({
+      ephemeral.users[uid] = {
         uid,
         top: body.items,
-      });
-      userIndex = ephemeral.users.length - 1;
-    } else {
-      ephemeral.users[userIndex].top = body.items;
+        groups: [],
+      };
     }
 
     console.log(ephemeral);
@@ -80,6 +83,33 @@ app.get('/callback', (req, res) => {
   .catch((error) => {
     console.error(error);
     res.redirect(frontendHost + '/error#' + querystring({
+      message: error.message,
+    }));
+  });
+});
+
+app.post('/groups/new', (req, res) => {
+  const access = req.data.access_token;
+  // get the uid
+  request.get({
+    url: 'https://api.spotify/v1/me',
+    headers: { 'Authorization': 'Bearer ' + access_token },
+    json: true,
+  })
+  .then((body) => {
+    const uid = body.id;
+    const code = randomStr(4).toUpperCase();
+
+    ephemeral.users[uid].groups.push(code);
+    ephemeral.groups[code] = {
+      playlist: null,
+      people: [uid],
+    };
+
+    res.send({ code });
+  })
+  .catch((error) => {
+    res.redirect(frontendHost + '/error#' + querystring.stringify({
       message: error.message,
     }));
   });
