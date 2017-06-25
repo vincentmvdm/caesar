@@ -23,8 +23,6 @@ import TableRow from '../../components/TableRow';
 import TableCell from '../../components/TableCell';
 import TableCellHeader from '../../components/TableCellHeader';
 
-import Icon from '../../components/Icon';
-
 import Avatar from '../../components/Avatar';
 
 import { createGroup } from '../../actions';
@@ -70,14 +68,12 @@ class Groups extends Component {
         if (this.props.me.images) {
             avatar = <Avatar src={this.props.me["images"][0]["url"]} alt={this.props.me["display_name"]} width="15" height="15" />;
         }
-
-        const icon = <Icon />
         const groups = this.props.myGroups.map((group) => {
             return (
                 <TableRow key={group.code}>
                     <TableCell>{group.code}</TableCell>
                     <TableCell></TableCell>
-                    <TableCell textRight>{icon}</TableCell>
+                    <TableCell>Status</TableCell>
                 </TableRow>
             );
         });
@@ -86,15 +82,16 @@ class Groups extends Component {
 
         if (groups.length === 0) {
             overview = (
-                <P>You aren’t a part of any groups yet. Create a group to start one or join an existing group.</P>
+                <P marginTop="4">You aren’t a part of any groups yet. Create a group to start one or join an existing group.</P>
             );
         } else {
             overview = (
                 <Table marginTop="4">
                     <TableHead>
                         <TableRow>
-                            <TableCellHeader>Group name</TableCellHeader>
-                            <TableCellHeader textRight>Group members</TableCellHeader>
+                            <TableCellHeader>Name</TableCellHeader>
+                            <TableCellHeader >Members</TableCellHeader>
+                            <TableCellHeader>Status</TableCellHeader>
                         </TableRow>
                     </TableHead>
                     <TableBody>
