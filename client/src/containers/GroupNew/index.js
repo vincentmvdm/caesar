@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import Container from '../../components/Container';
-import Margin from '../../components/Margin';
 import H1 from '../../components/H1';
 import P from '../../components/P';
-import Button from '../../components/Button';
 import List from '../../components/List';
 import ListItem from '../../components/ListItem';
 
-class Groups extends Component {
+class GroupNew extends Component {
     render() {
         return (
             <Container>
-                <H1 marginTop="6">Groups</H1>
+                <H1 marginTop="6">Create a new group</H1>
                 <P marginTop="1">Test...</P>
-                <Margin marginTop="4">
-                    <Button>Create a new group</Button>
-                </Margin>
                 <List>
                     <ListItem>Test</ListItem>
                     <ListItem>Testing</ListItem>
@@ -25,4 +20,4 @@ class Groups extends Component {
     }
 }
 
-export default Groups;
+export default GroupNew;
