@@ -1,3 +1,4 @@
+//kmeans implemented with javascript
 var data = [[1,2,3,4,5], [2,3,4,5,6], [3,4,5,6,7]];
 
 //figures out the ranges in values for each features
@@ -13,7 +14,7 @@ function getDataRanges(extremes) {
 //figures out the extreme data points
 function getDataExtremes(data) {
     var extremes = [];
-    for(ar i in data) 
+    for(ar i in data)
     {
         var point = data[i];
 
@@ -24,11 +25,11 @@ function getDataExtremes(data) {
                 extremes[dimension] = {min:150, max:-150};
             }
 
-            if (point[dimension] < extremes[dimension].min) 
+            if (point[dimension] < extremes[dimension].min)
             {
                 extremes[dimesnion].min = point[dimension];
             }
-            if (point[dimension] > extremes[dimension].max) 
+            if (point[dimension] > extremes[dimension].max)
             {
                 extremes[dimension].max = point[dimension];
             }
@@ -47,7 +48,7 @@ function initMeans(k) {
     while(k --)
     {
         var center = [];
-        for (var dimension in dataExtremes) 
+        for (var dimension in dataExtremes)
         {
             center[dimension] = dataExtremes[dimension].min + Math.random()*dataRange[dimension]);
         }
@@ -58,7 +59,7 @@ function initMeans(k) {
 
 //Assign clusters
 function makeAssignments() {
-    for(var i in data) 
+    for(var i in data)
     {
         var point = data[i];
         var distances = [];
@@ -72,7 +73,7 @@ function makeAssignments() {
                 var difference = point[dimension] - mean[dimension];
                 difference *= difference;
                 sum += difference;
-            
+
             }
             distances[j] = Math.sqrt(sum);
         }
@@ -97,7 +98,7 @@ function moveMeans() {
             sums[j][dimension] = 0;
         }
     }
-    for (var point_index in assignments) 
+    for (var point_index in assignments)
     {
     var mean_index = assignments[point_index];
     var point = data[point_index];
@@ -110,7 +111,7 @@ function moveMeans() {
             sums[mean_index][dimension] += point[dimension];
         }
     }
-    for (var mean_index in sums) 
+    for (var mean_index in sums)
     {
         if(0 === counts[mean_index])
         {
@@ -134,7 +135,7 @@ function moveMeans() {
     centers = sums;
 
     return moved;
-} 
+}
 
 //set up function
 function setup() {
