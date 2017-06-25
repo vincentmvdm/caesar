@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import A from '../../components/A';
 import Button from '../../components/Button';
 
 import Container from '../../components/Container';
 import H1 from '../../components/H1';
 import Margin from '../../components/Margin'
 import Form from '../../components/Form';
+import FormButton from '../../components/FormButton';
+
 
 import Label from '../../components/Label';
 
@@ -51,7 +54,7 @@ class GroupNew extends Component {
                         name="newGroupName"
                         component={this.renderField}
                     />
-                    <button type="submit">Submit</button>
+                    <FormButton type="submit">Submit</FormButton>
                     <Button to="/groups">Cancel</Button>
                 </Form>
             </Container>

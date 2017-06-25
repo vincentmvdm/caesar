@@ -3,17 +3,20 @@ import padding from '../../utils/padding';
 
 const A = styled.a`
     ${padding}
-    background-color: #1db954;
+    background-color: white;
     border-radius: 256px;
-    color: white;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    color: #2f4ab6;
+    padding-top: 12px;
+    padding-bottom: 12px;
     padding-left: 32px;
     padding-right: 32px;
+    font-family: inherit;
+    font-size: inherit;
     text-transform: uppercase;
+    text-decoration: none;
 
     &:hover {
-        background-color: #1cd85e;
+        background-color: #f5f5f5;
         cursor: pointer;
     }
 `;

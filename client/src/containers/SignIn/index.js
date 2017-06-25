@@ -5,6 +5,7 @@ import Measure from '../../components/Measure';
 import Margin from '../../components/Margin';
 import H1 from '../../components/H1';
 import P from '../../components/P';
+import DuoTone from '../../components/DuoTone';
 import A from '../../components/A';
 import querystring from 'querystring';
 
@@ -23,17 +24,19 @@ class SignIn extends Component {
             });
 
         return (
-            <Flex alignItems="center" justifyContent="center" height="100vh">
-                <Container>
-                    <Measure>
-                        <H1>Caesar</H1>
-                        <P marginTop="1">This is a description of our app.</P>
-                        <Margin marginTop="6">
-                            <A href={loginUri}>Sign in with Spotify</A>
-                        </Margin>
-                    </Measure>
-                </Container>
-            </Flex>
+            <DuoTone>
+                <Flex alignItems="center" justifyContent="center" height="100vh">
+                    <Container>
+                        <Measure>
+                            <H1 color="white">Cynthesis</H1>
+                            <P color="white" marginTop="1">Cynthesis uses Machine Learning to generate a playlist that appeals to all members of a group based on audio features from the users’ top tracks.</P>
+                            <Margin marginTop="6">
+                                <A href={loginUri}>Sign in with Spotify</A>
+                            </Margin>
+                        </Measure>
+                    </Container>
+                </Flex>
+            </DuoTone>
         );
     }
 }

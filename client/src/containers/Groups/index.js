@@ -7,6 +7,8 @@ import Container from '../../components/Container';
 import Flex from '../../components/Flex';
 import Margin from '../../components/Margin';
 
+import 'font-awesome/css/font-awesome.min.css';
+
 import H1 from '../../components/H1';
 import H2 from '../../components/H2';
 import P from '../../components/P';
@@ -18,6 +20,8 @@ import TableBody from '../../components/TableBody';
 import TableRow from '../../components/TableRow';
 import TableCell from '../../components/TableCell';
 import TableCellHeader from '../../components/TableCellHeader';
+
+import Icon from '../../components/Icon';
 
 import Avatar from '../../components/Avatar';
 
@@ -53,10 +57,13 @@ class Groups extends Component {
             avatar = <Avatar src={this.props.me["images"][0]["url"]} alt={this.props.me["display_name"]} width="15" height="15" />;
         }
 
+        const icon = <Icon />
         const groups = this.props.myGroups.map((group) => {
             return (
                 <TableRow key={group}>
                     <TableCell>{group}</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell textRight>{icon}</TableCell>
                 </TableRow>
             );
         });
