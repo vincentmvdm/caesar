@@ -49,4 +49,14 @@ injectGlobal`
     .danger {
         color: #fd483b;
     }
+
+    .notFocusedButton {
+        background-color: white;
+        border: 1px solid #2f4ab6;
+        color: #2f4ab6;
+
+        &:hover {
+            background-color: #f5f5f5;
+        }
+    }
 `;

@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import reducers from './reducers';
 import { createStore, applyMiddleware, compose } from 'redux';
 import promise from 'redux-promise';
-import reduxLogger from 'redux-logger';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -17,8 +16,7 @@ import Group from './containers/Group';
 import './global-styles';
 
 const createStoreWithMiddleware = compose(
-    applyMiddleware(promise)// ,
-    // applyMiddleware(reduxLogger)
+    applyMiddleware(promise)
 )(createStore);
 
 ReactDOM.render(

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { saveAuth, fetchMe, fetchGroups } from '../../actions';
-import { Link } from 'react-router-dom';
 
 import Container from '../../components/Container';
 import Flex from '../../components/Flex';
