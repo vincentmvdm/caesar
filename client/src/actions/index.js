@@ -40,12 +40,12 @@ export function fetchMe(access_token) {
 export function fetchGroups(access_token) {
     const options = {
         'method': 'post',
-        'url': 'localhost:8888/me',
-        'body': {
+        'url': 'http://localhost:8888/groups',
+        'data': {
             access_token,
         },
         'headers': {
-            'Content-Type': "application/json"
+            'Content-Type': "application/json",
         }
     };
 

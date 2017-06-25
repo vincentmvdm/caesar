@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { saveAuth, fetchMe } from '../../actions';
+import { saveAuth, fetchMe, fetchGroups } from '../../actions';
 import { Link } from 'react-router-dom';
 
 import Container from '../../components/Container';
@@ -36,6 +36,7 @@ class Groups extends Component {
         const refresh_token = hashParams["refresh_token"];
         this.props.saveAuth(access_token, refresh_token);
         this.props.fetchMe(access_token);
+        this.props.fetchGroups(access_token);
     }
 
     renderGroupList() {
@@ -87,7 +88,11 @@ class Groups extends Component {
 }
 
 function mapStateToProps(state) {
-    return { auth: state.auth, me: state.me };
+    return {
+        auth: state.auth,
+        me: state.me,
+        groups: state.groups,
+    };
 }
 
-export default connect(mapStateToProps, { saveAuth, fetchMe })(Groups);
+export default connect(mapStateToProps, { saveAuth, fetchMe, fetchGroups })(Groups);
