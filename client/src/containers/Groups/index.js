@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchTest } from '../../actions';
+
 import Container from '../../components/Container';
 import Margin from '../../components/Margin';
 import H1 from '../../components/H1';
@@ -8,6 +11,28 @@ import List from '../../components/List';
 import ListItem from '../../components/ListItem';
 
 class Groups extends Component {
+
+    componentDidMount() {
+        var hashParams = {};
+        var e, r = /([^&;=]+)=?([^&;]*)/g,
+            q = window.location.hash.substring(1);
+        while ( e = r.exec(q)) {
+           hashParams[e[1]] = decodeURIComponent(e[2]);
+        }
+        const access_token = hashParams["access_token"];
+        const refresh_token = hashParams["refresh_token"];
+
+        this.props.fetchTest(access_token, refresh_token);
+    }
+
+    renderTest() {
+        return this.props.test.map((playlist) => {
+            return (
+                <ListItem>{playlist.name}</ListItem>
+            );
+        });
+    }
+
     render() {
         return (
             <Container>
@@ -17,12 +42,15 @@ class Groups extends Component {
                     <Button>Create a new group</Button>
                 </Margin>
                 <List>
-                    <ListItem>Test</ListItem>
-                    <ListItem>Testing</ListItem>
+                    {this.renderTest()}
                 </List>
             </Container>
         );
     }
 }
 
-export default Groups;
+function mapStateToProps(state) {
+    return { test: state.test };
+}
+
+export default connect(mapStateToProps, { fetchTest })(Groups);

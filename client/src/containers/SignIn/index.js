@@ -11,12 +11,8 @@ import querystring from 'querystring';
 class SignIn extends Component {
     render() {
         const scope='user-read-private user-read-email';
-
-        const client_id = '524b1bd0390740f3802408f733ecc338'; // Your client id
-        const client_secret = 'b8b03bdcf7764b05bb57862de7b1b7b3'; // Your secret
-        const redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
-        
-
+        const client_id = '524b1bd0390740f3802408f733ecc338';
+        const redirect_uri = 'http://localhost:8888/callback';
 
         const loginUri = 'https://accounts.spotify.com/authorize?' +
             querystring.stringify({
