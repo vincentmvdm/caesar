@@ -120,7 +120,7 @@ app.post('/groups', (req, res) => {
 });
 
 app.post('/groups/new', (req, res) => {
-  const access_token = req.data.access_token;
+  const access_token = req.body.access_token;
   // get the uid
   request.get({
     url: 'https://api.spotify/v1/me',
@@ -140,9 +140,10 @@ app.post('/groups/new', (req, res) => {
     res.send({ code });
   })
   .catch((error) => {
-    res.redirect(frontendHost + '/error#' + querystring.stringify({
+    res.send({
+      error: true,
       message: error.message,
-    }));
+    });
   });
 });
 
