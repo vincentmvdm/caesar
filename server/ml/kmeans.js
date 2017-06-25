@@ -3,6 +3,8 @@
 var data = {};
 data["track1"] = [1,2,3,4,5];
 data["track2"] = [2,3,4,5,6];
+data["track3"] = [1,2,3,4,6];
+data["track4"] = [2,3,5,6,7];
 
 //figures out the ranges in values for each features
 function getDataRanges(extremes) {
@@ -31,7 +33,7 @@ function getDataExtremes(data) {
 
             if (point[dimension] < extremes[dimension].min)
             {
-                extremes[dimesnion].min = point[dimension];
+                extremes[dimension].min = point[dimension];
             }
             if (point[dimension] > extremes[dimension].max)
             {
@@ -44,9 +46,10 @@ function getDataExtremes(data) {
 
 //Initialize the centers
 function initMeans(k) {
+    var centers = [];
     if(!k)
     {
-        k = 4;
+        k = 2;
     }
 
     while(k --)
@@ -55,7 +58,7 @@ function initMeans(k) {
         for (var dimension in dataExtremes)
         {
             //random initialization
-            center[dimension] = dataExtremes[dimension].min + Math.random()*dataRange[dimension]);
+            center[dimension] = dataExtremes[dimension].min + Math.random()*dataRange[dimension];
         }
         //add to the centers, initial centers list.
         centers.push(center);
@@ -65,6 +68,7 @@ function initMeans(k) {
 
 //Assign clusters
 function makeAssignments() {
+    var assignments = [];
     for(var i in data)
     {
         var point = data[i];
@@ -76,7 +80,7 @@ function makeAssignments() {
             var sum = 0;
             for(var dimension in point)
             {
-                var difference = point[dimension] - mean[dimension];
+                var difference = point[dimension] - center[dimension];
                 difference *= difference;
                 sum += difference;
             }
@@ -84,11 +88,12 @@ function makeAssignments() {
         }
         assignments[i] = distances.indexOf(Math.min.apply(null, distances));
     }
+    return assignments;
 }
 
 //Recalculate means
 function moveMeans() {
-    makeAssignments();
+    var assignments = makeAssignments();
 
     var sums = Array(centers.length);
     var counts = Array(centers.length);
@@ -146,36 +151,56 @@ function moveMeans() {
 function setup() {
     //get the canvas
     //get the context
-    //
+
+    console.log("getting extremes");
     dataExtremes = getDataExtremes(data);
+    console.log(dataExtremes);
+    console.log("getting ranges");
     dataRange = getDataRanges(dataExtremes);
-    centers = initMeans(5);
+    console.log(dataRange);
+    console.log("finding initial centers");
+    centers = initMeans(2);
+    console.log(centers);
 
-    makeAssignments();
-
-    //try to find the largest cluster
-    var len = 0;
-    var playlist = null;
-    for(var c in assignments)
+    console.log("making assignments");
+    var assignments = makeAssignments();
+    console.log("these are the assignments");
+    console.log(assignments)
+    //try to find the largest cluster which is the playlist you return to the user
+    clusters = {};
+    for(var track in assignments)
     {
-      if(c.length > len){
-        len = c.length;
-        playlist = c;
+      var c = assignments[track];
+      if(clusters[c] == null){
+        clusters[c] = [];
+        clusters[c].push(track);
+      }
+      else{
+        clusters[c].push(track);
       }
     }
-    //this is the playlist that you return to the user
+    console.log(clusters);
+
+    //return the largest one
+    var longest = 0;
+    var playlist = null;
+    for(var c in clusters){
+      if(clusters[c].length > longest)
+      {
+        longest = clusters[c].length;
+        playlist = clusters[c];
+      }
+    }
+    //Final playlist outputted
     console.log(playlist);
-    draw();
-    setTimeout(run, drawDelay);
 }
 
 //checks to see if it's stopped
-function run() {
+/*function run() {
     var moved = moveMeans();
-    draw();
     if(moved)
     {
         setTimeout(run, drawDelay);
     }
-
-}
+}*/
+setup();
