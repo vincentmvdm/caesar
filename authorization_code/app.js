@@ -6,15 +6,17 @@
  * For more information, read
  * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
  */
-
+var axios = require('axios');
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 
+var scopes='user-read-private user-read-email';
+
 var client_id = '524b1bd0390740f3802408f733ecc338'; // Your client id
-var client_secret = 'c326216858154da7834deca767242cff'; // Your secret
-var redirect_uri = 'http://localhost:8888'; // Your redirect uri
+var client_secret = 'b8b03bdcf7764b05bb57862de7b1b7b3'; // Your secret
+var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -116,7 +118,6 @@ app.get('/callback', function(req, res) {
     });
   }
 });
-
 app.get('/refresh_token', function(req, res) {
 
   // requesting access token from refresh token
@@ -140,6 +141,7 @@ app.get('/refresh_token', function(req, res) {
     }
   });
 });
+
 
 console.log('Listening on 8888');
 app.listen(8888);
