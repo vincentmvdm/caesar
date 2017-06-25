@@ -28,8 +28,10 @@ class GroupJoin extends Component {
                         />
                     </div>
                 </Margin>
-                <Margin marginTop="1">
-                    {touched ? error : ''}
+                <Margin marginTop="2">
+                    <div className="danger">
+                        {touched ? error : ''}
+                    </div>
                 </Margin>
             </div>
         );
@@ -53,14 +55,14 @@ class GroupJoin extends Component {
                         name="existingGroupName"
                         component={this.renderField}
                     />
-                    <Margin marginTop="3">
+                    <Margin marginTop="4">
                         <Button to="/groups" notFocused>Cancel</Button>
                         <div style={{
                             display: 'inline-block',
                             width: 12,
                             height: 8,
                         }} />
-                        <FormButton type="submit">Submit</FormButton>
+                        <FormButton type="submit">Join</FormButton>
                     </Margin>
                 </Form>
             </Container>
@@ -72,7 +74,7 @@ function validate(values) {
     const errors = {};
 
     if (!values.existingGroupName) {
-        errors.existingGroupName = "Enter a group name";
+        errors.existingGroupName = "Enter a group code";
     }
 
     return errors;

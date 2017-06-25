@@ -45,4 +45,8 @@ injectGlobal`
         background: #2ae289;
         color: white;
     }
+
+    .danger {
+        color: #fd483b;
+    }
 `;

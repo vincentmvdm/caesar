@@ -92,8 +92,8 @@ class Groups extends Component {
                 <Table marginTop="4">
                     <TableHead>
                         <TableRow>
-                            <TableCellHeader>Name</TableCellHeader>
-                            <TableCellHeader >Members</TableCellHeader>
+                            <TableCellHeader>Group code</TableCellHeader>
+                            <TableCellHeader>Members</TableCellHeader>
                             <TableCellHeader>Status</TableCellHeader>
                         </TableRow>
                     </TableHead>
