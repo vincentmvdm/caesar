@@ -12,6 +12,8 @@ const client_secret = 'b8b03bdcf7764b05bb57862de7b1b7b3'; // Your secret
 const redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 const frontendHost = 'http://localhost:3000';
 
+const NATO = { A: 'Alfa', B: 'Bravo', C: 'Charlie', D: 'Delta', E: 'Echo', F: 'Foxtrot', G: 'Golf', H: 'Hotel', I: 'India', J: 'Juliett', K: 'Kilo', L: 'Lima', M: 'Mike', N: 'November', O: 'Oscar', P: 'Papa', Q: 'Quebec', R: 'Romeo', S: 'Sierra', T: 'Tango', U: 'Uniform', V: 'Victor', W: 'Whiskey', X: 'Xray', Y: 'Yankee', Z: 'Zulu', '1': 'One', '2': 'Two', '3': 'Three', '4': 'Four', '5': 'Five', '6': 'Six', '7': 'Seven', '8': 'Eight', '9': 'Nine', '0': 'Zero' };
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -163,7 +165,20 @@ app.post('/groups/join', (req, res) => {
     ephemeral.groups[code].people.push(uid);
     ephemeral.users[uid].groups.push(code);
     if (ephemeral.groups[code].people.length === 2) {
-      // TODO The group is complete for the first time, so create the playlist.
+      return request.post({
+        url: 'https://api.spotify.com/v1/users/' + uid + '/playlists',
+        headers: { 'Authorization': 'Bearer ' + access_token },
+        json: true,
+        body: {
+          description: 'Playlist fused from the essence of your tastes.',
+          public: true,
+          name: code.split('').map(c => NATO[c]).join(' '),
+        },
+      })
+      .then((body) => {
+        ephemeral.groups[code].playlist = body.id;
+        // TODO update the playlist
+      });
     }
     // TODO Update the playlist
     res.send({ success: true });
