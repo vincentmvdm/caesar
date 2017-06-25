@@ -1,10 +1,10 @@
 //kmeans implemented with javascript
 //data needs to come in in this form:
-var data = {};
-data["track1"] = [1,2,3,4,5];
+//var data = ;
+/*data["track1"] = [1,2,3,4,5];
 data["track2"] = [2,3,4,5,6];
 data["track3"] = [1,2,3,4,6];
-data["track4"] = [2,3,5,6,7];
+data["track4"] = [2,3,5,6,7];*/
 
 //figures out the ranges in values for each features
 function getDataRanges(extremes) {
@@ -19,10 +19,11 @@ function getDataRanges(extremes) {
 //figures out the extreme data points
 function getDataExtremes(data) {
     var extremes = [];
+    //each dictionary in data
     for(var i in data)
     {
         //this is the list attached to that song
-        var point = data[i];
+        var point = data[i]["value"];
         for(var dimension in point)
         {
             if( ! extremes[dimension])
@@ -67,13 +68,18 @@ function initMeans(k) {
 }
 
 //Assign clusters
-function makeAssignments() {
+function makeAssignments(data, centers) {
     var assignments = [];
+    //each dictionary
     for(var i in data)
     {
-        var point = data[i];
-        var distances = [];
-        for (var j in centers)
+        //this is the dictionary
+        var dat = data[i];
+        var point = dat["value"];
+        //var distances = [];
+        var dist = 1000000;
+        var idx = 0;
+        for (var j = 0; j < centers.length; j++)
         {
             //finding the distance from this point to the center
             var center = centers[j];
@@ -84,16 +90,20 @@ function makeAssignments() {
                 difference *= difference;
                 sum += difference;
             }
-            distances[j] = Math.sqrt(sum);
+            sum = Math.sqrt(sum);
+            if(sum < dist){
+              dist = sum;
+              idx = j;
+            }
         }
-        assignments[i] = distances.indexOf(Math.min.apply(null, distances));
+        assignments.push([idx, dat["key"]]);
     }
+    console.log(assignments);
     return assignments;
 }
 
 //Recalculate means
-function moveMeans() {
-    var assignments = makeAssignments();
+function moveMeans(assignments, data, centers) {
 
     var sums = Array(centers.length);
     var counts = Array(centers.length);
@@ -146,12 +156,11 @@ function moveMeans() {
 
     return moved;
 }
-
+var exports = module.exports = {};
 //set up function
-function setup() {
+exports.setup = function(data) {
     //get the canvas
     //get the context
-
     console.log("getting extremes");
     dataExtremes = getDataExtremes(data);
     console.log(dataExtremes);
@@ -159,15 +168,48 @@ function setup() {
     dataRange = getDataRanges(dataExtremes);
     console.log(dataRange);
     console.log("finding initial centers");
-    centers = initMeans(2);
+    centers = initMeans(4);
     console.log(centers);
 
     console.log("making assignments");
-    var assignments = makeAssignments();
-    console.log("these are the assignments");
-    console.log(assignments)
+    var iterations = 20;
+    var assignments = makeAssignments(data, centers);
+    console.log(assignments);
+    while(iterations >= 0){
+      assignments = makeAssignments(data, centers);
+      console.log("moving means");
+      moveMeans(assignments, data, centers);
+      iterations -= 1;
+    }
+    console.log("Assignments", assignments);
+    var cuck = {};
+    for(i = 0; i < assignments.length; i++){
+      var tup = assignments[i];
+      if(tup[0] in cuck){
+        cuck[tup[0]] += 1;
+      }
+      else{
+        cuck[tup[0]] = 1;
+      }
+    }
+    var pooop = Object.keys(cuck).reduce(function(a,b){return cuck[a]>cuck[b] ? a : b});
+    console.log("max ele", pooop);
+    console.log("cuck", cuck);
+    var playlist = [];
+    for(i = 0; i < assignments.length; i++){
+      if (assignments[i][0] = pooop){
+        playlist.push(assignments[i][1]);
+      }
+    }
+
+    console.log("ready");
+    //iterate over the assignments, get all the URIs for the k
+
+    console.log(playlist);
+
+
     //try to find the largest cluster which is the playlist you return to the user
-    clusters = {};
+    /*clusters = {};
     for(var track in assignments)
     {
       var c = assignments[track];
@@ -179,10 +221,10 @@ function setup() {
         clusters[c].push(track);
       }
     }
-    console.log(clusters);
+    console.log(clusters);*/
 
     //return the largest one
-    var longest = 0;
+    /*var longest = 0;
     var playlist = null;
     for(var c in clusters){
       if(clusters[c].length > longest)
@@ -192,15 +234,5 @@ function setup() {
       }
     }
     //Final playlist outputted
-    console.log(playlist);
+    console.log(playlist);*/
 }
-
-//checks to see if it's stopped
-/*function run() {
-    var moved = moveMeans();
-    if(moved)
-    {
-        setTimeout(run, drawDelay);
-    }
-}*/
-setup();
