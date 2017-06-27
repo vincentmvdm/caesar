@@ -1,5 +1,11 @@
 # caesar
 
+## Introduction
+Cynthesis uses Machine Learning to generate a playlist that appeals to all members of a group based on audio features from the users’ top tracks.
+
+https://devpost.com/software/cynthesis
+
+Caesar was built 
 ## Installation
 ```
 git clone https://github.com/vincentmvdm/caesar.git
