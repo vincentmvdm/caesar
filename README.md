@@ -14,3 +14,4 @@ npm start
 ```
 ## TODO
 - Enable 'multiplayer'
+- Ensure that a song can not occur in a playlist more than once (we're fairly confident that Spotify already prevents this from happening)
